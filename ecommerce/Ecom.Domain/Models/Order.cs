@@ -14,7 +14,7 @@ namespace Ecom.Domain.Models
         public List<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
         [Range(0, 100000,
         ErrorMessage = "Value is out of range.")]
-        public float? TotalPrice { get; set; }
+        public decimal? TotalPrice { get; set; }
         public OrderState OrderState { get; set; }
     }
 }

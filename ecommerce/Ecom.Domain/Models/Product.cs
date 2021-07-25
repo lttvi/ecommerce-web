@@ -19,10 +19,10 @@ namespace Ecom.Domain.Models
         [Required]
         [Range(0, 100000,
         ErrorMessage = "Value is out of range.")]
-        public float Price { get; set; }
+        public decimal Price { get; set; }
         public List<Comment> Comments { get; set; }
 
-        public float? ProductRating { get; set; }
+        public decimal? ProductRating { get; set; }
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime? ModifiedDate { get; set; }

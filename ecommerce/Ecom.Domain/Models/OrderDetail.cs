@@ -20,6 +20,6 @@ namespace Ecom.Domain.Models
         [Required]
         [Range(0, 100000,
         ErrorMessage = "Value is out of range.")]
-        public float EstimatedPrice { get; set; }
+        public decimal EstimatedPrice { get; set; }
     }
 }

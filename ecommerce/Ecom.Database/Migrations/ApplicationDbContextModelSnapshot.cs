@@ -170,8 +170,8 @@ namespace Ecom.Database.Migrations
                     b.Property<int>("OrderState")
                         .HasColumnType("int");
 
-                    b.Property<float?>("TotalPrice")
-                        .HasColumnType("real");
+                    b.Property<decimal?>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -187,8 +187,8 @@ namespace Ecom.Database.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<float>("EstimatedPrice")
-                        .HasColumnType("real");
+                    b.Property<decimal>("EstimatedPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
@@ -233,11 +233,11 @@ namespace Ecom.Database.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float?>("ProductRating")
-                        .HasColumnType("real");
+                    b.Property<decimal?>("ProductRating")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
