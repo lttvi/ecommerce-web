@@ -1,4 +1,5 @@
-﻿using Ecom.Database;
+﻿/*
+using Ecom.Database;
 using Ecom.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -44,3 +45,4 @@ namespace Ecom.WebAPI.Services.Products
         }
     }
 }
+*/

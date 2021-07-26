@@ -22,6 +22,7 @@ namespace Ecom.Domain.Models
         [EmailAddress]
         //[StringLength(16, MinimumLength = 8, ErrorMessage = "The Password value must be in range 8-16 characters. ")]
         public string Email { get; set; }
+        
 
     }
 }

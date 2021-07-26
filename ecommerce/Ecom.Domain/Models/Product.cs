@@ -24,9 +24,22 @@ namespace Ecom.Domain.Models
 
         public decimal? ProductRating { get; set; }
         [Required]
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; } 
         public DateTime? ModifiedDate { get; set; }
 
 
+        public Product(string name, Category category ,string description, decimal price)
+        {
+            Name = name;
+            Description = description;
+            Category = category;
+            Price = price;
+            CreatedDate = DateTime.Now;
+            ModifiedDate = null;
+        }
+
+        public Product()
+        {
+        }
     }
 }

@@ -15,9 +15,22 @@ namespace Ecom.WebAPI.Services.Products
         {
             _context = context;
         }
-        public void Do(Product product)
+        public async Task<Product> Do(ProductVM product)
         {
-            _context.Products.Add(product);
+            var category = await _context.Categories.FindAsync(product.CatId);
+            var newProduct = new Product(product.Name, category, product.Description, product.Price);
+            _context.Products.Add(newProduct);
+            await _context.SaveChangesAsync();
+            return newProduct;
+        }
+
+        public class ProductVM
+        {
+            public string Name { get; set; }
+            public int CatId { get; set; }
+            public string Description { get; set; }
+            public decimal Price { get; set; }
+
         }
     }
 }
