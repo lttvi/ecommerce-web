@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Ecom.Database;
 using Ecom.Domain.Models;
 
-namespace Ecom.WebAPI.Services.Products
+namespace Ecom.WebAPI.Services
 {
     public class CreateProduct
     {
@@ -15,9 +15,10 @@ namespace Ecom.WebAPI.Services.Products
         {
             _context = context;
         }
-        public void Do(Product product)
-        {
-            _context.Products.Add(product);
+        public void Do(string name, Category cat, string des, decimal price)
+        {            
+            _context.Products.Add(new Product(name, cat, des, price));
+            
         }
     }
 }

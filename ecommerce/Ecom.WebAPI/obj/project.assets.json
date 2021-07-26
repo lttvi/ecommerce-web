@@ -7558,11 +7558,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Program Files (x86)\\Study\\C#_dotnet\\ecommerce-web\\ecommerce\\Ecom.WebAPI\\Ecom.WebAPI.csproj",
+      "projectUniqueName": "D:\\Program Files (x86)\\Study\\C#_dotnet\\ecommerce-web\\ECommerce\\Ecom.WebAPI\\Ecom.WebAPI.csproj",
       "projectName": "Ecom.WebAPI",
-      "projectPath": "D:\\Program Files (x86)\\Study\\C#_dotnet\\ecommerce-web\\ecommerce\\Ecom.WebAPI\\Ecom.WebAPI.csproj",
+      "projectPath": "D:\\Program Files (x86)\\Study\\C#_dotnet\\ecommerce-web\\ECommerce\\Ecom.WebAPI\\Ecom.WebAPI.csproj",
       "packagesPath": "C:\\Users\\Vi\\.nuget\\packages\\",
-      "outputPath": "D:\\Program Files (x86)\\Study\\C#_dotnet\\ecommerce-web\\ecommerce\\Ecom.WebAPI\\obj\\",
+      "outputPath": "D:\\Program Files (x86)\\Study\\C#_dotnet\\ecommerce-web\\ECommerce\\Ecom.WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -7584,8 +7584,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Program Files (x86)\\Study\\C#_dotnet\\ecommerce-web\\ecommerce\\Ecom.Database\\Ecom.Database.csproj": {
-              "projectPath": "D:\\Program Files (x86)\\Study\\C#_dotnet\\ecommerce-web\\ecommerce\\Ecom.Database\\Ecom.Database.csproj"
+            "D:\\Program Files (x86)\\Study\\C#_dotnet\\ecommerce-web\\ECommerce\\Ecom.Database\\Ecom.Database.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\Study\\C#_dotnet\\ecommerce-web\\ECommerce\\Ecom.Database\\Ecom.Database.csproj"
             }
           }
         }

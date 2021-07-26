@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Ecom.Domain.Models
 {
     public class Product
-    {
+    {   
         public int Id { get; set; }
         [Required]
         [StringLength(30, ErrorMessage = "Name cannot exceed 30 characters. ")]
@@ -24,9 +24,16 @@ namespace Ecom.Domain.Models
 
         public decimal? ProductRating { get; set; }
         [Required]
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
 
-
+        public Product(string name, Category category, string description, decimal price)
+        {            
+            Name = name;
+            Category = category;
+            Description = description;
+            Price = price;
+            CreatedDate = DateTime.Now;
+        }
     }
 }

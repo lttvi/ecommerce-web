@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Ecom.WebAPI.Services.Products
+namespace Ecom.WebAPI.Services.GetData
 {
     public class GetProducts
     {
@@ -26,7 +26,7 @@ namespace Ecom.WebAPI.Services.Products
                 Comments = x.Comments,
                 ProductRating = x.ProductRating, //need check datatype
                 CreatedDate = x.CreatedDate,
-                ModifiedDate = x.ModifiedDate
+                //ModifiedDate = x.ModifiedDate
             });
         
 
