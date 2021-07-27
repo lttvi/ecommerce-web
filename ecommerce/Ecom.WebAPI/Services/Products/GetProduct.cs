@@ -7,20 +7,17 @@ using System.Threading.Tasks;
 
 namespace Ecom.WebAPI.Services.Products
 {
-    public class GetProducts
+    public class GetProduct
     {
         private ApplicationDbContext _context;
 
-        public GetProducts(ApplicationDbContext ctx)
+        public GetProduct(ApplicationDbContext ctx)
         {
             _context = ctx;
-        }
-
-        public IEnumerable<ProductVM> Do()
-        {
-            return _context.Products
-                .Select(x => new ProductVM
-            {   
+        }        
+        public ProductVM Do(int id) =>
+            _context.Products.Where(x => x.Id == id).Select(x => new ProductVM
+            {
                 Id = x.Id,
                 Name = x.Name,
                 Category = new CategoryVM
@@ -30,11 +27,8 @@ namespace Ecom.WebAPI.Services.Products
                     Description = x.Category.Description
                 },
                 Description = x.Description,
-                Price = x.Price,
-                CreatedDate = x.CreatedDate,
-                ModifiedDate = x.ModifiedDate
-            }).ToList();
-        }
+                Price = x.Price
+            }).FirstOrDefault();
         public class CategoryVM
         {
             public int Id { get; set; }
@@ -51,6 +45,5 @@ namespace Ecom.WebAPI.Services.Products
             public DateTime CreatedDate { get; set; }
             public DateTime? ModifiedDate { get; set; }
         }
-
     }
 }

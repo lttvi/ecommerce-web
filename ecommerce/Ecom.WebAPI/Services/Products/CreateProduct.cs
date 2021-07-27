@@ -15,16 +15,39 @@ namespace Ecom.WebAPI.Services.Products
         {
             _context = context;
         }
-        public async Task<Product> Do(ProductVM product)
+        public async Task<Response> Do(Request request)
         {
-            var category = await _context.Categories.FindAsync(product.CatId);
-            var newProduct = new Product(product.Name, category, product.Description, product.Price);
-            _context.Products.Add(newProduct);
+            var category = await _context.Categories.FindAsync(request.CatId);
+            var product = new Product
+            {
+                Name = request.Name,
+                Category = category,
+                Description = request.Description,
+                Price = request.Price,
+                CreatedDate = DateTime.Now
+            };
+            _context.Products.Add(product);
             await _context.SaveChangesAsync();
-            return newProduct;
+            return new Response
+            {
+                Id = product.Id,
+                Name = product.Name,
+                CatName = product.Category.Name,
+                Description = product.Description,
+                Price = product.Price
+            };
         }
 
-        public class ProductVM
+        public class Response
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string CatName { get; set; }
+            public string Description { get; set; }
+            public decimal Price { get; set; }
+        }
+
+        public class Request
         {
             public string Name { get; set; }
             public int CatId { get; set; }
@@ -32,5 +55,6 @@ namespace Ecom.WebAPI.Services.Products
             public decimal Price { get; set; }
 
         }
+
     }
 }

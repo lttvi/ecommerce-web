@@ -26,18 +26,7 @@ namespace Ecom.Domain.Models
         [Required]
         public DateTime CreatedDate { get; set; } 
         public DateTime? ModifiedDate { get; set; }
-
-
-        public Product(string name, Category category ,string description, decimal price)
-        {
-            Name = name;
-            Description = description;
-            Category = category;
-            Price = price;
-            CreatedDate = DateTime.Now;
-            ModifiedDate = null;
-        }
-
+        
         public Product()
         {
         }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dpjCpUu5RADVTwQkUipq4stQO8EhFC9/lkYQ7grd1JWZiK1clu9pKiZ6og8k5TARb3pkGDUh6uCteFgFBezujA==",
+  "dgSpecHash": "zM9MV9L+qkS4rKd+kdoFw/FmlvgmprBLBJgD+QMOrxHdfRHpLBjOb5dmCWzkqcSH1w3jqoPhktKM8B3JDhANjQ==",
   "success": true,
-  "projectFilePath": "D:\\Program Files (x86)\\Study\\C#_dotnet\\ecommerce-web\\ecommerce\\Ecom.WebAPI\\Ecom.WebAPI.csproj",
+  "projectFilePath": "D:\\Program Files (x86)\\Study\\C#_dotnet\\ecommerce-web\\ECommerce\\Ecom.WebAPI\\Ecom.WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vi\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Vi\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.8\\microsoft.aspnetcore.cryptography.internal.5.0.8.nupkg.sha512",

@@ -24,25 +24,15 @@ namespace Ecom.WebAPI.Controllers
         }
 
         // GET: api/Product
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
-        {
-            return await _context.Products.ToListAsync();
-        }
+        [HttpGet]        
+        public IActionResult GetProducts()
+            => Ok(new GetProducts(_context).Do());
+        
 
-        // GET: api/Product/5
+        // GET: api/Product/5         
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
-        {
-            var product = await _context.Products.FindAsync(id);
-
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return product;
-        }
+        public IActionResult GetProduct(int id) =>
+            Ok(new GetProduct(_context).Do(id));
 
         // PUT: api/Product/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -74,34 +64,37 @@ namespace Ecom.WebAPI.Controllers
 
             return NoContent();
         }
-
+        [HttpPut("test/{id}")]
+        public IActionResult TestUpdateProduct(int id) {
+            
+            return Ok();
+        }
+            
         // POST: api/Product
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /*
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
-        {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
-        }
-        //Test add
-        [HttpPost("test-add")]
-        public async Task<ActionResult<Product>> TestAdd(ProductVM product)
-        {
-            //await new CreateProduct(_context).Do(product);
-            return Ok(await new CreateProduct(_context).Do(product)); //=>IT WORKS  but why return 500
-        }
-        //
-        [HttpPost("test-add1")]
-        public async Task<ActionResult<Product>> Add(ProductVM product)
+        public async Task<ActionResult<Product>> PostProduct(ProductVMCreate product)
         {
             var category = await _context.Categories.FindAsync(product.CatId);
-            var newProduct = new Product(product.Name, category, product.Description, product.Price);
+            var newProduct = new Product
+            {
+                Name = product.Name,
+                Category = category,
+                Description = product.Description,
+                Price = product.Price
+            };
             _context.Products.Add(newProduct);
             await _context.SaveChangesAsync();
-            return Ok();    //also work
+            return Ok(newProduct);    //also work but code 500
         }
+        */
+        //Test add
+        [HttpPost("test")]
+        public IActionResult TestAdd(CreateProduct.Request request)
+            => Ok(new CreateProduct(_context).Do(request));     
+
+
         // DELETE: api/Product/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
@@ -115,7 +108,7 @@ namespace Ecom.WebAPI.Controllers
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok();
         }
 
         private bool ProductExists(int id)
