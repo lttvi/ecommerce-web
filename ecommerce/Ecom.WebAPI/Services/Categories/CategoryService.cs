@@ -1,6 +1,7 @@
 ﻿using Ecom.Database;
 using Ecom.Domain.Models;
 using Ecom.WebAPI.ViewModels.Categories;
+using Ecom.WebAPI.ViewModels.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,15 +90,25 @@ namespace Ecom.WebAPI.Services.Categories
         }
         */
         //broken
-        public async Task<CategoryVM> GetCategoryByProductId(int productId)
+        public  Task<CategoryVM> GetCategoryByProductId(int productId)
         {
-            var cat =  _context.Products.Where(x => x.Id == productId).Select(x => new CategoryVM
+
+            var p = _context.Products.Where(x => x.Id == productId).Select(x => new ProductVM1
             {
                 Id = x.Id,
                 Name = x.Name,
-                Description = x.Description
+                Category = new CategoryVM { 
+                    Id = x.Category.Id,
+                    Name = x.Category.Name,
+                    Description = x.Category.Description
+                },
+                Description = x.Description,
+                Price = x.Price,
+                isFetured = x.isFetured,
+                CreatedDate = x.CreatedDate,
+                ModifiedDate = x.ModifiedDate
             }).FirstOrDefault();
-            return cat;
+            throw new Exception();
         }
 
         public async Task<int> UpdateCategory(int id, UpdateCategoryRequest request)
@@ -121,6 +132,11 @@ namespace Ecom.WebAPI.Services.Categories
         public bool CatogoryExist(string name) {
             return _context.Categories.Any(e => e.Name == name);
         }
-        
+
+        public Task<CategoryVM1> GetCategoryWithProductsById(int id)
+        {
+
+            throw new NotImplementedException();
+        }
     }
 }

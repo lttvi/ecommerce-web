@@ -9,7 +9,7 @@ namespace Ecom.WebAPI.Services.Categories
     {
         Task<IEnumerable<CategoryVM>> GetCategories();
         Task<CategoryVM> GetCategoryById(int id);
-        Task<CategoryVM> GetCategoryByProductId(int productId);
+        Task<CategoryVM1> GetCategoryWithProductsById(int id);
         Task<int> CreateCategory(CreateCategoryRequest request);
         Task<int> UpdateCategory(int id, UpdateCategoryRequest request);
         Task<int> DeleteCategory(int id);

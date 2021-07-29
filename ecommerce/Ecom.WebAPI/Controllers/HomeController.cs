@@ -40,7 +40,7 @@ namespace Ecom.WebAPI.Controllers
         {
             return Ok(await _categoryService.GetCategoryById(id));
         }
-        [HttpGet("get-category-by-productid/{id}")]
+        [HttpGet("get-category-by-productid/{productId}")]
         public async Task<IActionResult> GetCategoryByProductId(int productId)
         {
             var cat = await _categoryService.GetCategoryByProductId(productId);
@@ -65,10 +65,10 @@ namespace Ecom.WebAPI.Controllers
             }
             return Ok(await _productService.GetProductById(id));
         }
-        [HttpGet("get-product-by-categoryid/{id}")]
-        public async Task<IActionResult> GetProductByCategoryId(int catId)
+        [HttpGet("get-product-by-categoryid/{categoryId}")]
+        public async Task<IActionResult> GetProductByCategoryId(int categoryId)
         {
-            var product = await _productService.GetProductByCategoryId(catId);
+            var product = await _productService.GetProductByCategoryId(categoryId);
             return Ok(product);
         }
         [HttpGet("get-featured")]

@@ -1,5 +1,6 @@
 ﻿using Ecom.Database;
 using Ecom.Domain.Models;
+using Ecom.WebAPI.ViewModels.Categories;
 using Ecom.WebAPI.ViewModels.Products;
 using System;
 using System.Collections.Generic;
@@ -60,26 +61,34 @@ namespace Ecom.WebAPI.Services.Products
 
             return product.Id;
         }
-        //broken
+
         public async Task<ProductVM> GetProductByCategoryId(int categoryId)
         {
-            //var cat = await _context.Categories.FindAsync(categoryId);
-            var query = from cat in _context.Categories
-                        where cat.Id == categoryId
-                        select cat.SameCatProducts;
-            query.Select(x => new ProductVM { 
-                
-            }).ToList();
-            throw new NotImplementedException();
-        }
-
-        public async Task<ProductVM> GetProductById(int id)
-        {
-            return _context.Products.Where(x => x.Id == id).Select(x => new ProductVM
+            var rs = _context.Products.Where(x => x.Category.Id == categoryId).Select(x => new ProductVM
             {
                 Id = x.Id,
                 Name = x.Name,
                 CategoryName = x.Category.Name,
+                Description = x.Description,
+                Price = x.Price,
+                isFetured = x.isFetured,
+                CreatedDate = x.CreatedDate,
+                ModifiedDate = x.ModifiedDate
+            }).FirstOrDefault();
+            return rs;
+        }
+
+        public async Task<ProductVM1> GetProductById(int id)
+        {
+            return _context.Products.Where(x => x.Id == id).Select(x => new ProductVM1
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Category = new CategoryVM { 
+                    Id = x.Category.Id,
+                    Name = x.Category.Name,
+                    Description = x.Category.Description
+                },
                 Description = x.Description,
                 Price = x.Price,
                 isFetured = x.isFetured,
