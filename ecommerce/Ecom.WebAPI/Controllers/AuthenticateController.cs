@@ -70,8 +70,7 @@ namespace Ecom.WebAPI.Controllers
                     );
 
                 return Ok(new
-                {   
-                    fullname = user.Name,
+                {                    
                     roles = userRoles,
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo
@@ -121,6 +120,7 @@ namespace Ecom.WebAPI.Controllers
 
             ApplicationUser user = new ApplicationUser()
             {
+                Name = model.Name,
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.Username

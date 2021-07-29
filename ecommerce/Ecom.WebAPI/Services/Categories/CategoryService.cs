@@ -104,7 +104,7 @@ namespace Ecom.WebAPI.Services.Categories
                 },
                 Description = x.Description,
                 Price = x.Price,
-                isFetured = x.isFetured,
+                isFetured = x.isFeatured,
                 CreatedDate = x.CreatedDate,
                 ModifiedDate = x.ModifiedDate
             }).FirstOrDefault();

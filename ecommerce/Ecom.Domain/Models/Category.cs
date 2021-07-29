@@ -9,10 +9,8 @@ namespace Ecom.Domain.Models
     public class Category
     {
         public int Id { get; set; }
-        [Required]
-        [StringLength(30, ErrorMessage = "Name value cannot exceed 30 characters. ")]
-        public string Name { get; set; }
-        [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters. ")]
+        
+        public string Name { get; set; }        
         public string? Description { get; set; }
         public IEnumerable<Product> SameCatProducts { get; set; }
     }

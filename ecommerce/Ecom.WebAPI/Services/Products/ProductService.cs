@@ -33,7 +33,7 @@ namespace Ecom.WebAPI.Services.Products
                 Description = request.Description,
                 Category = await cat,
                 Price = request.Price,
-                isFetured = request.isFetured,
+                isFeatured = request.isFeatured,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = null,
                 Comments = new List<Comment>(),
@@ -71,12 +71,14 @@ namespace Ecom.WebAPI.Services.Products
                 CategoryName = x.Category.Name,
                 Description = x.Description,
                 Price = x.Price,
-                isFetured = x.isFetured,
+                isFeatured = x.isFeatured,
                 CreatedDate = x.CreatedDate,
                 ModifiedDate = x.ModifiedDate
             }).FirstOrDefault();
             return rs;
         }
+
+
 
         public async Task<ProductVM1> GetProductById(int id)
         {
@@ -91,7 +93,7 @@ namespace Ecom.WebAPI.Services.Products
                 },
                 Description = x.Description,
                 Price = x.Price,
-                isFetured = x.isFetured,
+                isFetured = x.isFeatured,
                 CreatedDate = x.CreatedDate,
                 ModifiedDate = x.ModifiedDate
             }).FirstOrDefault();
@@ -122,7 +124,7 @@ namespace Ecom.WebAPI.Services.Products
             product.Price = request.Price;
             product.Category = cat;
             product.ModifiedDate = DateTime.Now;
-            product.isFetured = request.isFetured;            
+            product.isFeatured = request.isFeatured;            
 
             _context.Products.Update(product);
 
@@ -140,22 +142,37 @@ namespace Ecom.WebAPI.Services.Products
                 CategoryName = x.Category.Name,
                 Description = x.Description,
                 Price = x.Price,
-                isFetured = x.isFetured,
+                isFeatured = x.isFeatured,
                 CreatedDate = x.CreatedDate,
                 ModifiedDate = x.ModifiedDate
             }).ToList();
         }
 
-        public async Task<IEnumerable<ProductVM>> GetFreaturedProducts()
+        public async Task<IEnumerable<ProductVM>> GetProductsByCategoryId(int categoryId)
         {
-            return _context.Products.Where(x => x.isFetured == true).Select(x => new ProductVM
+            var rs = _context.Products.Where(x => x.Category.Id == categoryId).Select(x => new ProductVM
             {
                 Id = x.Id,
                 Name = x.Name,
                 CategoryName = x.Category.Name,
                 Description = x.Description,
                 Price = x.Price,
-                isFetured = x.isFetured,
+                isFeatured = x.isFeatured,
+                CreatedDate = x.CreatedDate,
+                ModifiedDate = x.ModifiedDate
+            }).ToList();
+            return rs;
+        }
+        public async Task<IEnumerable<ProductVM>> GetFreaturedProducts()
+        {
+            return _context.Products.Where(x => x.isFeatured == true).Select(x => new ProductVM
+            {
+                Id = x.Id,
+                Name = x.Name,
+                CategoryName = x.Category.Name,
+                Description = x.Description,
+                Price = x.Price,
+                isFeatured = x.isFeatured,
                 CreatedDate = x.CreatedDate,
                 ModifiedDate = x.ModifiedDate
             }).ToList();
@@ -175,12 +192,12 @@ namespace Ecom.WebAPI.Services.Products
             {
                 value = true;
             }
-            else if (convertString == "true")
+            else if (convertString == "false")
             {
                 value = false;
             }
             else throw new Exception("Invalid isFeatured value");
-            product.isFetured = value;
+            product.isFeatured = value;
 
             _context.Products.Update(product);
 

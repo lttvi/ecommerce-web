@@ -10,7 +10,7 @@ namespace Ecom.WebAPI.Services.Products
         Task<IEnumerable<ProductVM>> GetFreaturedProducts();
         Task<int> UpdateFeaturedAttr(int id, UpdateIsFeaturedAttrRequest request);
         Task<ProductVM1> GetProductById(int id);
-        Task<ProductVM> GetProductByCategoryId(int productId);
+        Task<IEnumerable<ProductVM>> GetProductsByCategoryId(int productId);
         Task<int> CreateProduct(CreateProductRequest request);
         Task<int> UpdateProduct(int id, UpdateProductRequest request);
         Task<int> DeleteProduct(int id);

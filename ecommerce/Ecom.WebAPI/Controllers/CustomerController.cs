@@ -14,7 +14,13 @@ namespace Ecom.WebAPI.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        [HttpGet("info")]
+
+        [HttpGet]
+        public IActionResult TestConnection()
+        {
+            return Ok("Connected");
+        }
+            [HttpGet("info")]
         public Task<IActionResult> GetCustomerInfo()
         {
             throw new NotImplementedException();
