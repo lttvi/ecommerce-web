@@ -164,3 +164,4 @@ D:\Program Files (x86)\Study\C#_dotnet\ecommerce-web\ecommerce\Ecom.CustomerUI\b
 D:\Program Files (x86)\Study\C#_dotnet\ecommerce-web\ecommerce\Ecom.CustomerUI\bin\Debug\net5.0\Ecom.Domain.pdb
 D:\Program Files (x86)\Study\C#_dotnet\ecommerce-web\ecommerce\Ecom.CustomerUI\obj\Debug\net5.0\Ecom.CustomerUI.csproj.AssemblyReference.cache
 D:\Program Files (x86)\Study\C#_dotnet\ecommerce-web\ecommerce\Ecom.CustomerUI\obj\Debug\net5.0\Ecom.CustomerUI.MvcApplicationPartsAssemblyInfo.cs
+D:\Program Files (x86)\Study\C#_dotnet\ecommerce-web\ECommerce\Ecom.CustomerUI\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

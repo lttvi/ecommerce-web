@@ -20,6 +20,8 @@ namespace Ecom.Domain.Models
         [Range(0, 100000,
         ErrorMessage = "Value is out of range.")]
         public decimal Price { get; set; }
+        public List<ProductImage> ProductImages { get; set; }
+        public bool isFetured { get; set; }
         public List<Comment> Comments { get; set; }
 
         public decimal? ProductRating { get; set; }

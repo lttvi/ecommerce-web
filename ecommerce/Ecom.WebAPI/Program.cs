@@ -17,46 +17,7 @@ namespace Ecom.WebAPI
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
-
-            try
-            {
-                using (var scope = host.Services.CreateScope())
-                {
-                    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                    var userManger = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-
-                    context.Database.EnsureCreated();
-
-                    if (!context.Users.Any())
-                    {
-                        var adminUser = new IdentityUser()
-                        {
-                            UserName = "Admin"
-                        };
-
-                        var customerUser = new IdentityUser()
-                        {
-                            UserName = "Customer"
-                        };
-
-                        userManger.CreateAsync(adminUser, "password").GetAwaiter().GetResult();
-                        userManger.CreateAsync(customerUser, "password").GetAwaiter().GetResult();
-
-                        var adminClaim = new Claim("Role", "Admin");
-                        var customerClaim = new Claim("Role", "Manager");
-
-                        userManger.AddClaimAsync(adminUser, adminClaim).GetAwaiter().GetResult();
-                        userManger.AddClaimAsync(customerUser, customerClaim).GetAwaiter().GetResult();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            host.Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

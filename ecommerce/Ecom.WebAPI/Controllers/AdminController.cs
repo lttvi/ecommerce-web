@@ -1,108 +1,121 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Ecom.Database;
-using Ecom.Domain.Models;
+using Ecom.WebAPI.Services.Categories;
+using System.Threading.Tasks;
+using Ecom.WebAPI.ViewModels.Categories;
+using Ecom.WebAPI.Services.Products;
+using Ecom.WebAPI.ViewModels.Products;
+using Ecom.WebAPI.Authentication;
+using System;
 
 namespace Ecom.WebAPI.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     [Route("api/[controller]")]
     [ApiController]
     public class AdminController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private ICategoryService _categoryService;
+        private IProductService _productService;
 
-        public AdminController(ApplicationDbContext context)
+        public AdminController(ICategoryService categoryService, IProductService productService)
         {
-            _context = context;
+            _categoryService = categoryService;
+            _productService = productService;
         }
 
-        // GET: api/Admin
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Admin>>> GetAdmins()
+        public IActionResult TestConnection()
         {
-            return await _context.Admins.ToListAsync();
+            return Ok("Connected");
         }
-
-        // GET: api/Admin/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Admin>> GetAdmin(int id)
+        [HttpGet("info")]
+        public Task<IActionResult> GetCustomerInfo()
         {
-            var admin = await _context.Admins.FindAsync(id);
-
-            if (admin == null)
+            throw new NotImplementedException();
+        }
+        /// <summary>
+        /// Category
+        /// </summary>
+        [HttpGet("get-categories")]
+        public async Task<IActionResult> GetCategories()
+        {
+            return Ok(await _categoryService.GetCategories());
+        }
+        [HttpGet("get-category/{id}")]
+        public async Task<IActionResult> GetCategoryById(int id)
+        {
+            return Ok(await _categoryService.GetCategoryById(id));
+        }
+        [HttpGet("get-category-by-productid/{id}")]
+        public async Task<IActionResult> GetCategoryByProductId(int productId)
+        {
+            var cat = await _categoryService.GetCategoryByProductId(productId);
+            return Ok(cat);
+        }
+        [HttpPost("create-category")]
+        public async Task<IActionResult> CreateCategory(CreateCategoryRequest request)
+        {
+            return Ok(await _categoryService.CreateCategory(request));
+        }
+        [HttpPut("update-category/{id}")]
+        public async Task<IActionResult> UpdateCategory(int id, UpdateCategoryRequest request)
+        {
+            return Ok(await _categoryService.UpdateCategory(id, request));
+        }
+        [HttpDelete("detele-category/{id}")]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            return Ok(await _categoryService.DeleteCategory(id));
+        }
+        /// <summary>
+        /// Product
+        /// </summary>
+        [HttpGet("get-products")]
+        public async Task<IActionResult> GetProducts()
+        {
+            return Ok(await _productService.GetProducts());
+        }
+        [HttpGet("get-product/{id}")]
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            var product = await _productService.GetProductById(id);
+            if (product == null)
             {
                 return NotFound();
             }
-
-            return admin;
+            return Ok(await _productService.GetProductById(id));
         }
-
-        // PUT: api/Admin/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAdmin(int id, Admin admin)
+        [HttpGet("get-product-by-categoryid/{id}")]
+        public async Task<IActionResult> GetProductByCategoryId(int catId)
         {
-            if (id != admin.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(admin).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AdminExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var product = await _productService.GetProductByCategoryId(catId);
+            return Ok(product);
         }
-
-        // POST: api/Admin
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Admin>> PostAdmin(Admin admin)
+        [HttpPost("create-product")]
+        public async Task<IActionResult> CreateProduct(CreateProductRequest request)
         {
-            _context.Admins.Add(admin);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetAdmin", new { id = admin.Id }, admin);
+            return Ok(await _productService.CreateProduct(request));
         }
-
-        // DELETE: api/Admin/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAdmin(int id)
+        [HttpPut("update-product/{id}")]
+        public async Task<IActionResult> UpdateProduct(int id, UpdateProductRequest request)
         {
-            var admin = await _context.Admins.FindAsync(id);
-            if (admin == null)
-            {
-                return NotFound();
-            }
-
-            _context.Admins.Remove(admin);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return Ok(await _productService.UpdateProduct(id, request));
         }
-
-        private bool AdminExists(int id)
+        [HttpDelete("detele-product/{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
         {
-            return _context.Admins.Any(e => e.Id == id);
+            return Ok(await _productService.DeleteProduct(id));
+        }
+        [HttpPut("update-featured/{id}")]
+        public async Task<IActionResult> UpdateFeaturedAttr(int id, UpdateIsFeaturedAttrRequest request)
+        {
+            return Ok(await _productService.UpdateFeaturedAttr(id, request));
+        }
+        [HttpGet("get-featured")]
+        public async Task<IActionResult> GetFreaturedProducts()
+        {
+            return Ok(await _productService.GetFreaturedProducts());
         }
     }
 }
